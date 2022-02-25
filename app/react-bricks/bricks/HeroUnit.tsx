@@ -38,6 +38,9 @@ const HeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
           )}
           placeholder="Type a title..."
           propName="title"
+          renderPlaceholder={(props) => (
+            <span className="opacity-30">{props.children}</span>
+          )}
         />
         <RichText
           renderBlock={(props) => (
