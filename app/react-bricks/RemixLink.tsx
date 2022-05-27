@@ -19,8 +19,8 @@ const RemixLink: types.RenderLocalLink = ({
   }
 
   return (
-    <Link to={href}>
-      <a className={anchorClassName}>{children}</a>
+    <Link to={href} className={anchorClassName}>
+      {children}
     </Link>
   )
 }

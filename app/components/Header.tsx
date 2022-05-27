@@ -6,11 +6,7 @@ const Header: React.FC = () => (
       <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center">
         <div className="flex flex-col sm:flex-row items-center mb-4 sm:mb-0">
           <a href="/">
-            <img
-              src="/react-bricks-logo.svg"
-              className="w-48"
-              alt="React Bricks"
-            />
+            <img src="/react-bricks-logo.svg" className="w-48" alt="React Bricks" />
           </a>
           <div className="sm:ml-8 flex space-x-5 text-center">
             <Link to="/" className="text-gray-500 hover:text-pink-700">
@@ -18,6 +14,9 @@ const Header: React.FC = () => (
             </Link>
             <Link to="/about-us" className="text-gray-500 hover:text-pink-700">
               About us
+            </Link>
+            <Link to="/blog" className="text-gray-500 hover:text-pink-700">
+              Blog
             </Link>
           </div>
         </div>
