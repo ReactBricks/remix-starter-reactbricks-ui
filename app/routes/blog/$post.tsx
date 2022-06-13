@@ -4,7 +4,7 @@ import { useLoaderData } from 'remix'
 import type { MetaFunction } from 'remix'
 
 export const loader = async ({ params }: { params: { post: string } }) => {
-  console.log('🚀 ~ file: $post.tsx ~ line 7 ~ loader ~ post', params)
+
   try {
     const page = await fetchPage(params.post, process.env.API_KEY as string)
     return { page }
