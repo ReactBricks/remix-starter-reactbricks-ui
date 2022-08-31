@@ -1,5 +1,5 @@
 import { fetchPages, fetchTags, types } from 'react-bricks/frontend'
-import { useLoaderData, Link } from 'remix'
+import { useLoaderData, Link } from '@remix-run/react'
 import Layout from '~/components/Layout'
 
 import BlogListItem from '~/components/PostListItem'

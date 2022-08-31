@@ -9,8 +9,8 @@ import {
   ScrollRestoration,
   useNavigate,
   useLoaderData,
-} from 'remix'
-import type { MetaFunction } from 'remix'
+} from '@remix-run/react'
+import type { MetaFunction } from '@remix-run/node'
 import { ReactBricks } from 'react-bricks/frontend'
 import config from './react-bricks/config'
 
@@ -26,8 +26,11 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader = () => {
-  const apiKey = process.env.API_KEY
-  const appId = process.env.APP_ID
+  //   API_KEY=d515ac3f-7697-4713-b9b3-87d727d85723
+  // APP_ID=103f3706-1eb9-490c-900a-86af0b704f78
+
+  const apiKey = 'd515ac3f-7697-4713-b9b3-87d727d85723'
+  const appId = '103f3706-1eb9-490c-900a-86af0b704f78'
 
   if (!apiKey || !appId) {
     throw new Error('Missing React Bricks credentials in .env file')
@@ -40,8 +43,7 @@ export default function App() {
   const navigate = useNavigate()
   const { appId, apiKey } = useLoaderData()
 
-  const savedColorMode =
-    typeof window === 'undefined' ? '' : localStorage.getItem('color-mode')
+  const savedColorMode = typeof window === 'undefined' ? '' : localStorage.getItem('color-mode')
   const [colorMode, setColorMode] = useState(savedColorMode || 'light')
 
   const toggleColorMode = () => {

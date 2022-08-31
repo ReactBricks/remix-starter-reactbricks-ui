@@ -1,6 +1,8 @@
 import React from 'react'
-import type { MetaFunction } from 'remix'
+import type { MetaFunction } from '@remix-run/node'
+
 import { Admin, Login } from 'react-bricks'
+import AdminClient from '~/components/AdminClient.client'
 
 export const meta: MetaFunction = () => {
   return {
@@ -9,11 +11,7 @@ export const meta: MetaFunction = () => {
 }
 
 const AdminLogin: React.FC = () => {
-  return (
-    <Admin isLogin>
-      <Login />
-    </Admin>
-  )
+  return <AdminClient />
 }
 
 export default AdminLogin

@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 import { ReactBricksContext, PageViewer, fetchPage, cleanPage } from 'react-bricks/frontend'
-import { useLoaderData } from 'remix'
-import type { MetaFunction } from 'remix'
+import { useLoaderData } from '@remix-run/react'
+import type { MetaFunction } from '@remix-run/node'
 
 export const loader = async ({ params }: { params: { post: string } }) => {
-
   try {
     const page = await fetchPage(params.post, process.env.API_KEY as string)
     return { page }
