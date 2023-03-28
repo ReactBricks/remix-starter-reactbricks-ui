@@ -1,9 +1,17 @@
+const defaultTheme = require("tailwindcss/defaultTheme")
+const colors = require("tailwindcss/colors")
+
 module.exports = {
-  content: ['./app/**/*.{ts,tsx}', './node_modules/react-bricks-ui/**/*.js'],
-  darkMode: 'class',
+  content: ["./app/**/*.{ts,tsx}"],
+  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        newsLetter:
+          "0 1px 3px 0 rgba(0, 0, 0, 0.1) , 0 5px 15px 0 rgba(0, 0, 0, 0.05)",
+      },
+    },
   },
+  plugins: [require("@tailwindcss/forms")],
   variants: {},
-  plugins: [],
 }

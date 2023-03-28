@@ -1,15 +1,10 @@
-import { types } from 'react-bricks/frontend'
-
-// React Bricks UI website bricks
-import website from 'react-bricks-ui/website'
-import blog from 'react-bricks-ui/blog'
-
+import { types } from "react-bricks/frontend"
+//import reactBrickUi from "./react-bricks-ui"
 // Example brick
-import HeroUnit from './HeroUnit'
+import HeroUnit from "./custom/HeroUnit"
 
 const bricks: types.Brick<any>[] = [
-  ...website,
-  ...blog,
+  //...reactBrickUi, // React Bricks UI
   HeroUnit,
   // Put here your other bricks...
 ]
