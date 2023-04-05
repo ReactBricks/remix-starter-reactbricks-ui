@@ -8,11 +8,12 @@ import {
 import { useLoaderData } from "@remix-run/react"
 import type { MetaFunction } from "@remix-run/node"
 import Layout from "~/components/Layout"
+import ErrorMessage from "~/components/ErrorMessage"
 
-export const loader = async ({ params }: { params: { post: string } }) => {
+export const loader = async () => {
   const [page, header, footer] = await Promise.all([
-    fetchPage(params.post, process.env.API_KEY as string).catch(() => {
-      throw new Error(`Cannot find the "${params.post}" post.`)
+    fetchPage("/", process.env.API_KEY as string).catch(() => {
+      throw new Error(`Cannot find the home page.`)
     }),
     fetchPage("header", process.env.API_KEY as string).catch(() => {
       throw new Error(
@@ -53,6 +54,14 @@ export default function Page() {
       <PageViewer page={headerOk} />
       <PageViewer page={pageOk} />
       <PageViewer page={footerOk} />
+    </Layout>
+  )
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <Layout>
+      <ErrorMessage error={error} />
     </Layout>
   )
 }
