@@ -13,7 +13,7 @@ const RemixLink: types.RenderLocalLink = ({
   let anchorClassName = ''
 
   if (location.pathname === href) {
-    anchorClassName = activeClassName || ''
+    anchorClassName = `${className} ${activeClassName}`
   } else {
     anchorClassName = className || ''
   }
