@@ -1,12 +1,18 @@
-import { types } from "react-bricks/frontend"
-//import reactBrickUi from "./react-bricks-ui"
-// Example brick
-import HeroUnit from "./custom/HeroUnit"
+import { types } from 'react-bricks/frontend'
+import reactBricksUITheme from './react-bricks-ui/index'
+import HeroUnit from './custom/HeroUnit'
 
-const bricks: types.Brick<any>[] = [
-  //...reactBrickUi, // React Bricks UI
-  HeroUnit,
-  // Put here your other bricks...
+const bricks: types.Theme[] = [
+  reactBricksUITheme, // React Bricks UI
+  {
+    themeName: 'Custom Theme 1',
+    categories: [
+      {
+        categoryName: 'Hero sections',
+        bricks: [HeroUnit], // Custom Bricks
+      },
+    ],
+  },
 ]
 
 export default bricks
