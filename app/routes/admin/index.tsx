@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 
 const AdminLogin: React.FC = () => {
   return (
-    <Admin isAdmin>
+    <Admin isLogin>
       <Login />
     </Admin>
   )
