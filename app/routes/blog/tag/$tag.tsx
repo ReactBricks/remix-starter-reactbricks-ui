@@ -3,14 +3,13 @@ import {
   fetchPage,
   fetchPages,
   fetchTags,
-  ReactBricksContext,
   types,
   cleanPage,
   PageViewer,
 } from "react-bricks/frontend"
+import { useReactBricksContext } from "react-bricks"
 import { useLoaderData, Link } from "@remix-run/react"
 import PostListItem from "~/components/PostListItem"
-import { useContext } from "react"
 
 export const loader = async ({ params }: { params: any }) => {
   const { tag } = params
@@ -69,7 +68,7 @@ export default function List() {
   const { filterTag, pagesByTag, popularPosts, allTags, header, footer } =
     useLoaderData<LoaderProps>()
 
-  const { pageTypes, bricks } = useContext(ReactBricksContext)
+  const { pageTypes, bricks } = useReactBricksContext()
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = header ? cleanPage(footer, pageTypes, bricks) : null
 

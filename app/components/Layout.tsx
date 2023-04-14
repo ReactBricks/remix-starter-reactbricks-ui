@@ -1,12 +1,11 @@
-import { useContext } from "react"
-import { ReactBricksContext } from "react-bricks"
+import { useReactBricksContext } from "react-bricks"
 
 interface LayoutProps {
   children?: React.ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isDarkColorMode } = useContext(ReactBricksContext)
+  const { isDarkColorMode } = useReactBricksContext()
   return (
     <div
       className={`${

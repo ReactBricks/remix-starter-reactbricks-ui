@@ -2,15 +2,14 @@ import {
   fetchPage,
   fetchPages,
   fetchTags,
-  ReactBricksContext,
   types,
   cleanPage,
   PageViewer,
 } from "react-bricks/frontend"
+import { useReactBricksContext } from "react-bricks"
 import { useLoaderData, Link } from "@remix-run/react"
 
 import BlogListItem from "~/components/PostListItem"
-import { useContext } from "react"
 
 export const loader = async () => {
   const posts = await fetchPages(process.env.API_KEY as string, {
@@ -48,7 +47,7 @@ export default function List() {
     footer: types.Page
   }>()
 
-  const { pageTypes, bricks } = useContext(ReactBricksContext)
+  const { pageTypes, bricks } = useReactBricksContext()
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = header ? cleanPage(footer, pageTypes, bricks) : null
 
