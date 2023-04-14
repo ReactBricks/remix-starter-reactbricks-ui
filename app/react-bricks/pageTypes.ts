@@ -10,20 +10,28 @@ const pageTypes: types.IPageType[] = [
   },
   {
     name: 'blog',
-    pluralName: 'blog',
+    pluralName: 'Blog',
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
     getDefaultContent: () => [],
     allowedBlockTypes: [
       'title',
       'paragraph',
-      'quote',
+      'big-image',
       'video',
-      'code-block',
+      'code',
       'tweet',
       'tweet-light',
-      'big-image',
+      'blog-title',
+      'newsletter-subscribe',
+      'external-data-example',
     ],
+    getExternalData: () =>
+      fetch('https://catfact.ninja/fact')
+        .then((response) => response.json())
+        .then((data) => ({
+          catFact: data.fact,
+        })),
   },
   {
     name: 'layout',
