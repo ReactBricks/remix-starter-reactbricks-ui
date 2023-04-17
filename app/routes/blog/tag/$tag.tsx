@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import {
   fetchPage,
   fetchPages,
@@ -10,6 +9,7 @@ import {
 import { useReactBricksContext } from "react-bricks"
 import { useLoaderData, Link } from "@remix-run/react"
 import PostListItem from "~/components/PostListItem"
+import TagListItem from "~/components/TagListItem"
 
 export const loader = async ({ params }: { params: any }) => {
   const { tag } = params
@@ -65,7 +65,7 @@ interface LoaderProps {
 }
 
 export default function List() {
-  const { filterTag, pagesByTag, popularPosts, allTags, header, footer } =
+  const { filterTag, pagesByTag, allTags, header, footer } =
     useLoaderData<LoaderProps>()
 
   const { pageTypes, bricks } = useReactBricksContext()
@@ -75,71 +75,44 @@ export default function List() {
   return (
     <>
       <PageViewer page={headerOk} />
-      <div className='container mx-auto'>
-        <h1 className='text-center text-4xl sm:text-6xl lg:text-7xl leading-none font-black tracking-tight text-gray-900 pb-4 mt-10 sm:mt-12 mb-4'>
-          Blog
-        </h1>
-        <div className='max-w-6xl mx-auto px-8 py-16 flex space-x-24'>
-          <section className='flex-[2] space-y-8'>
-            <h2 className='text-pink-500 uppercase mb-8 tracking-widest font-bold'>
-              {filterTag}
-            </h2>
+      <div className='bg-white dark:bg-gray-900'>
+        <div className='max-w-6xl mx-auto px-8 py-16'>
+          <div className='flex items-center justify-between  text-gray-900 dark:text-white pb-4 mt-10 sm:mt-12 mb-4'>
+            <h1 className='max-w-2xl text-4xl sm:text-6xl lg:text-4xl font-bold tracking-tight'>
+              {filterTag} articles
+            </h1>
+
+            <Link
+              to='/blog'
+              className='hover:-translate-x-2 transition-transform duration-300'
+            >
+              &laquo; Return to blog
+            </Link>
+          </div>
+
+          <div className='flex flex-wrap items-center'>
+            {allTags
+              ?.filter((tag) => tag !== "popular")
+              .map((tag) => (
+                <TagListItem tag={tag} key={tag} />
+              ))}
+          </div>
+
+          <hr className='mt-6 mb-10 dark:border-gray-600' />
+
+          <div className='grid lg:grid-cols-2 xl:grid-cols-3 sm:gap-12'>
             {pagesByTag?.map((post) => (
               <PostListItem
                 key={post.id}
-                title={post.name}
-                href={`/blog/${post.slug}`}
+                title={post.meta.title || ""}
+                href={post.slug}
                 content={post.meta.description || ""}
+                author={post.author}
+                date={post.publishedAt || ""}
+                featuredImg={post.meta.featuredImage || ""}
               />
             ))}
-          </section>
-          <section className='flex-1 space-y-16'>
-            <div>
-              <h2 className='text-pink-500 uppercase mb-8 tracking-widest font-bold'>
-                Tags
-              </h2>
-              <div className='flex flex-wrap items-center'>
-                {/* T A G  */}
-                {allTags
-                  ?.filter((tag) => tag !== "popular")
-                  .map((tag) => (
-                    <Link
-                      to={tag === filterTag ? "/blog" : `/blog/tag/${tag}`}
-                      key={tag}
-                    >
-                      <a
-                        className={classNames(
-                          "inline-block text-sm font-bold mr-2 mb-2 transform duration-200  rounded-md px-2 py-1",
-                          tag === filterTag
-                            ? "text-blue-800 bg-blue-100 hover:bg-blue-200 hover:text-blue-900"
-                            : "text-cyan-800 bg-cyan-100 hover:bg-cyan-200 hover:text-cyan-900"
-                        )}
-                      >
-                        <div className='' style={{ zIndex: -1 }} />
-                        {tag}
-                      </a>
-                    </Link>
-                  ))}
-                {/*  */}
-              </div>
-            </div>
-            <div>
-              <h2 className='text-pink-500 uppercase mb-8 tracking-widest font-bold'>
-                Most Popular
-              </h2>
-              <ul>
-                {popularPosts?.map((post) => (
-                  <li key={post.id}>
-                    <Link to={`/blog/${post.slug}`}>
-                      <a className='text-gray-900 hover:text-cyan-600 font-bold text-lg leading-10 transition-colors'>
-                        {post.name}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
+          </div>
         </div>
       </div>
       <PageViewer page={footerOk} />
