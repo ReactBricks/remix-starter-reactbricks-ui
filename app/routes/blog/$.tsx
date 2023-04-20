@@ -1,22 +1,22 @@
-import { PageViewer, fetchPage, cleanPage } from "react-bricks/frontend"
-import { useReactBricksContext } from "react-bricks"
-import { useLoaderData } from "@remix-run/react"
-import type { MetaFunction } from "@remix-run/node"
-import Layout from "~/components/Layout"
+import { PageViewer, fetchPage, cleanPage } from 'react-bricks/frontend'
+import { useReactBricksContext } from 'react-bricks/frontend'
+import { useLoaderData } from '@remix-run/react'
+import type { MetaFunction } from '@remix-run/node'
+import Layout from '~/components/Layout'
 
 export const loader = async ({ params }: { params: any }) => {
-  const splat = params["*"]
+  const splat = params['*']
 
   const [page, header, footer] = await Promise.all([
     fetchPage(splat, process.env.API_KEY as string).catch(() => {
       throw new Error(`Cannot find the "${splat}" post.`)
     }),
-    fetchPage("header", process.env.API_KEY as string).catch(() => {
+    fetchPage('header', process.env.API_KEY as string).catch(() => {
       throw new Error(
         `Cannot find header. Create a new 'header' entity under 'Layout'`
       )
     }),
-    fetchPage("footer", process.env.API_KEY as string).catch(() => {
+    fetchPage('footer', process.env.API_KEY as string).catch(() => {
       throw new Error(
         `Cannot find footer. Create a new 'footer' entity under 'Layout'`
       )
@@ -32,7 +32,7 @@ export const loader = async ({ params }: { params: any }) => {
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: data?.page?.meta?.title || "Blog post",
+    title: data?.page?.meta?.title || 'Blog post',
   }
 }
 

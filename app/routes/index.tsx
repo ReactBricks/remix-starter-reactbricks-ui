@@ -1,10 +1,10 @@
 import config from '~/react-bricks/config'
-import { PageViewer, fetchPage, cleanPage } from "react-bricks/frontend"
-import { useReactBricksContext } from "react-bricks"
-import { useLoaderData } from "@remix-run/react"
-import type { MetaFunction } from "@remix-run/node"
-import Layout from "~/components/Layout"
-import ErrorMessage from "~/components/ErrorMessage"
+import { PageViewer, fetchPage, cleanPage } from 'react-bricks/frontend'
+import { useReactBricksContext } from 'react-bricks/frontend'
+import { useLoaderData } from '@remix-run/react'
+import type { MetaFunction } from '@remix-run/node'
+import Layout from '~/components/Layout'
+import ErrorMessage from '~/components/ErrorMessage'
 
 export const loader = async () => {
   const [page, header, footer] = await Promise.all([

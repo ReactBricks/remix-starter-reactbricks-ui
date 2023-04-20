@@ -1,4 +1,4 @@
-import { useReactBricksContext } from 'react-bricks'
+import { useReactBricksContext } from 'react-bricks/frontend'
 
 interface LayoutProps {
   children?: React.ReactNode
