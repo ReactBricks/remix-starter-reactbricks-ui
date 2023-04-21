@@ -54,7 +54,7 @@ export default function List() {
 
   return (
     <>
-      <PageViewer page={headerOk} />
+      <PageViewer page={headerOk} showClickToEdit={false} />
       <div className="bg-white dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-8 py-16">
           <h1 className="max-w-2xl text-4xl sm:text-6xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white pb-4 mt-10 sm:mt-12 mb-4">
@@ -88,7 +88,7 @@ export default function List() {
           </div>
         </div>
       </div>
-      <PageViewer page={footerOk} />
+      <PageViewer page={footerOk} showClickToEdit={false} />
     </>
   )
 }
