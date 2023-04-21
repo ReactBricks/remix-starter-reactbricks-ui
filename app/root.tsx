@@ -40,7 +40,8 @@ export default function App() {
   const navigate = useNavigate()
   const { appId, apiKey } = useLoaderData()
 
-  const savedColorMode = typeof window === 'undefined' ? '' : localStorage.getItem('color-mode')
+  const savedColorMode =
+    typeof window === 'undefined' ? '' : localStorage.getItem('color-mode')
   const [colorMode, setColorMode] = useState(savedColorMode || 'light')
 
   const toggleColorMode = () => {
@@ -61,9 +62,22 @@ export default function App() {
     }`,
   }
 
+  const clientThemeCode = `
+  ;(() => {
+    const theme = localStorage.getItem('color-mode') || "light"
+    const cl = document.documentElement.classList;
+    const themeAlreadyApplied = cl.contains('light') || cl.contains('dark');
+
+    if (!themeAlreadyApplied) {
+      cl.add(theme);
+    }
+  })();
+  `
+
   return (
-    <html lang="en">
+    <html lang="en" className={savedColorMode ?? 'light'}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: clientThemeCode }} />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
