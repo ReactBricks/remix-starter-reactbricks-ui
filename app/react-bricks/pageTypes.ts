@@ -7,33 +7,39 @@ const pageTypes: types.IPageType[] = [
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
     getDefaultContent: () => [],
-    excludedBlockTypes: [
-      'title',
-      'paragraph',
-      'quote',
-      'video',
-      'code-block',
-      'tweet',
-      'tweet-light',
-      'image',
-    ],
   },
   {
     name: 'blog',
-    pluralName: 'blog',
+    pluralName: 'Blog',
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
     getDefaultContent: () => [],
     allowedBlockTypes: [
       'title',
       'paragraph',
-      'quote',
+      'big-image',
       'video',
-      'code-block',
+      'code',
       'tweet',
       'tweet-light',
-      'image',
+      'blog-title',
+      'newsletter-subscribe',
+      'external-data-example',
     ],
+    getExternalData: () =>
+      fetch('https://catfact.ninja/fact')
+        .then((response) => response.json())
+        .then((data) => ({
+          catFact: data.fact,
+        })),
+  },
+  {
+    name: 'layout',
+    pluralName: 'layout',
+    defaultLocked: false,
+    defaultStatus: types.PageStatus.Published,
+    getDefaultContent: () => [],
+    isEntity: true,
   },
 ]
 

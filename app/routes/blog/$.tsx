@@ -1,20 +1,15 @@
-import config from '~/react-bricks/config'
 import { PageViewer, fetchPage, cleanPage } from 'react-bricks/frontend'
 import { useReactBricksContext } from 'react-bricks/frontend'
 import { useLoaderData } from '@remix-run/react'
 import type { MetaFunction } from '@remix-run/node'
 import Layout from '~/components/Layout'
-import ErrorMessage from '~/components/ErrorMessage'
 
-export const loader = async () => {
+export const loader = async ({ params }: { params: any }) => {
+  const splat = params['*']
+
   const [page, header, footer] = await Promise.all([
-    fetchPage(
-      '/',
-      process.env.API_KEY as string,
-      undefined,
-      config.pageTypes
-    ).catch(() => {
-      throw new Error(`Cannot find the home page.`)
+    fetchPage(splat, process.env.API_KEY as string).catch(() => {
+      throw new Error(`Cannot find the "${splat}" post.`)
     }),
     fetchPage('header', process.env.API_KEY as string).catch(() => {
       throw new Error(
@@ -55,14 +50,6 @@ export default function Page() {
       <PageViewer page={headerOk} />
       <PageViewer page={pageOk} />
       <PageViewer page={footerOk} />
-    </Layout>
-  )
-}
-
-export function ErrorBoundary({ error }: { error: Error }) {
-  return (
-    <Layout>
-      <ErrorMessage error={error} />
     </Layout>
   )
 }

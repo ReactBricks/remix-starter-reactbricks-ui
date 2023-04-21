@@ -1,9 +1,28 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
-  content: ['./app/**/*.{ts,tsx}', './node_modules/react-bricks-ui/**/*.js'],
+  content: [
+    './app/routes/**/*.tsx',
+    './app/components/**/*.tsx',
+    './app/react-bricks/**/*.{ts,tsx}',
+    './app/root.tsx'
+  ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
+      },
+      screens: {
+        sm: '600px',
+        lg: '900px',
+        xl: '1200px',
+      },
+      boxShadow: {
+        newsLetter:
+          '0 1px 3px 0 rgba(0, 0, 0, 0.1) , 0 5px 15px 0 rgba(0, 0, 0, 0.05)',
+      },
+    },
   },
-  variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
