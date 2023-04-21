@@ -54,9 +54,9 @@ export default function Page() {
 
   return (
     <Layout>
-      <PageViewer page={headerOk} />
+      <PageViewer page={headerOk} showClickToEdit={false} />
       <PageViewer page={pageOk} />
-      <PageViewer page={footerOk} />
+      <PageViewer page={footerOk} showClickToEdit={false} />
     </Layout>
   )
 }
