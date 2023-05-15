@@ -62,11 +62,9 @@ export default function List() {
           </h1>
 
           <div className="flex flex-wrap items-center">
-            {tags
-              ?.filter((tag) => tag !== 'popular')
-              .map((tag) => (
-                <TagListItem tag={tag} key={tag} />
-              ))}
+            {tags?.map((tag) => (
+              <TagListItem tag={tag} key={tag} />
+            ))}
           </div>
 
           <hr className="mt-6 mb-10 dark:border-gray-600" />
