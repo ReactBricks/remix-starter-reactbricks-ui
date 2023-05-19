@@ -5,7 +5,7 @@ import HeroUnit from './custom/HeroUnit'
 const bricks: types.Theme[] = [
   reactBricksUITheme, // React Bricks UI
   {
-    themeName: 'Custom',
+    themeName: 'Default',
     categories: [
       {
         categoryName: 'Hero sections',
