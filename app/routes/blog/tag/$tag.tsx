@@ -10,12 +10,13 @@ import { useReactBricksContext } from 'react-bricks/frontend'
 import { useLoaderData, Link } from '@remix-run/react'
 import PostListItem from '~/components/PostListItem'
 import TagListItem from '~/components/TagListItem'
+import type { LoaderArgs } from '@remix-run/node'
 
-export const loader = async ({ params }: { params: any }) => {
+export const loader = async ({ params }: LoaderArgs) => {
   const { tag } = params
 
   const pagesByTag = await fetchPages(process.env.API_KEY as string, {
-    tag: tag.toString(),
+    tag: tag?.toString(),
     type: 'blog',
     pageSize: 1000,
     sort: '-publishedAt',

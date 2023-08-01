@@ -3,12 +3,13 @@ import { useReactBricksContext } from 'react-bricks/frontend'
 import { useLoaderData } from '@remix-run/react'
 import type { MetaFunction } from '@remix-run/node'
 import Layout from '~/components/Layout'
+import type { LoaderArgs } from '@remix-run/node'
 
-export const loader = async ({ params }: { params: any }) => {
+export const loader = async ({ params }: LoaderArgs) => {
   const splat = params['*']
 
   const [page, header, footer] = await Promise.all([
-    fetchPage(splat, process.env.API_KEY as string).catch(() => {
+    fetchPage(splat!, process.env.API_KEY as string).catch(() => {
       throw new Error(`Cannot find the "${splat}" post.`)
     }),
     fetchPage('header', process.env.API_KEY as string).catch(() => {
