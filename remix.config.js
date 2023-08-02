@@ -3,6 +3,7 @@
  */
 module.exports = {
   appDirectory: "app",
+  tailwind: true,
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
   serverBuildDirectory: "build",

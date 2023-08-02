@@ -14,11 +14,11 @@ import type { MetaFunction } from '@remix-run/node'
 import { ReactBricks } from 'react-bricks/frontend'
 import config from './react-bricks/config'
 
-import styles from './tailwind.css'
+import stylesheet from './tailwind.css'
 import ErrorMessage from './components/ErrorMessage'
 
 export function links() {
-  return [{ rel: 'stylesheet', href: styles }]
+  return [{ rel: 'stylesheet', href: stylesheet }]
 }
 
 export const meta: MetaFunction = () => {

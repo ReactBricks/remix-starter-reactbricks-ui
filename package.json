@@ -6,39 +6,35 @@
   "author": "Matteo Frana <f2@f2.net>",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:css && remix build",
-    "build:css": "tailwindcss -o ./app/tailwind.css",
-    "dev": "concurrently \"npm run dev:css\" \"node -r dotenv/config node_modules/.bin/remix dev\"",
-    "dev:css": "tailwindcss -o ./app/tailwind.css --watch",
-    "postinstall": "remix setup node",
+    "build": "remix build",
+    "dev": "remix dev",
     "start": "remix-serve build",
-    "start-local": "node -r dotenv/config node_modules/.bin/remix-serve build"
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@remix-run/react": "^1.14.3",
-    "@remix-run/serve": "^1.14.3",
-    "@tailwindcss/forms": "^0.5.3",
-    "dayjs": "^1.11.7",
-    "dotenv": "^16.0.3",
+    "@remix-run/react": "^1.19.1",
+    "@remix-run/serve": "^1.19.1",
+    "@tailwindcss/forms": "^0.5.4",
+    "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
     "email-validator": "^2.0.4",
     "jsonp": "^0.2.1",
     "pigeon-maps": "^0.21.3",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
-    "react-bricks": "^3.11.3",
+    "react-bricks": "^3.12.1",
     "react-dom": "^18.2.0",
     "react-slick": "^0.29.0",
-    "remix": "^1.14.3",
+    "remix": "^1.19.1",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.14.3",
-    "@types/react": "^18.0.30",
-    "@types/react-dom": "^18.0.11",
-    "concurrently": "^7.6.0",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.7",
-    "typescript": "^5.0.2"
+    "@remix-run/dev": "^1.19.1",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=14"
