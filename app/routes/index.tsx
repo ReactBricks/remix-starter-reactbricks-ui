@@ -41,14 +41,14 @@ export const loader = async () => {
 }
 
 export default function Page() {
-  const { page, header, footer } = useLoaderData()
+  const { page, header, footer } = useLoaderData<typeof loader>()
   // Clean the received content
   // Removes unknown or not allowed bricks
   const { pageTypes, bricks } = useReactBricksContext()
   const pageOk = page ? cleanPage(page, pageTypes, bricks) : null
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = footer ? cleanPage(footer, pageTypes, bricks) : null
-  
+
   const { meta } = page
   const schemaOrgData = getSchemaOrgData(page)
 

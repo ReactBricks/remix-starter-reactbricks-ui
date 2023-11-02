@@ -7,7 +7,7 @@ import {
   PageViewer,
 } from 'react-bricks/frontend'
 import { useReactBricksContext } from 'react-bricks/frontend'
-import { useLoaderData, Link } from '@remix-run/react'
+import { useLoaderData } from '@remix-run/react'
 
 import PostListItem from '~/components/PostListItem'
 import TagListItem from '~/components/TagListItem'

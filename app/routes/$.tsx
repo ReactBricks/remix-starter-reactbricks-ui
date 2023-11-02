@@ -3,10 +3,10 @@ import {
   fetchPage,
   cleanPage,
   getSchemaOrgData,
+  types
 } from 'react-bricks/frontend'
 import { useReactBricksContext } from 'react-bricks/frontend'
 import { useLoaderData } from '@remix-run/react'
-import type { MetaFunction } from '@remix-run/node'
 import Layout from '~/components/Layout'
 import ErrorMessage from '~/components/ErrorMessage'
 import { redirect } from '@remix-run/node'
@@ -41,14 +41,12 @@ export const loader = async ({ params }: LoaderArgs) => {
   }
 }
 
-// export const meta: MetaFunction = ({ data }) => {
-//   return {
-//     title: data?.page?.meta?.title || 'Blog post',
-//   }
-// }
-
 export default function Page() {
-  const { page, header, footer } = useLoaderData()
+  const { page, header, footer } = useLoaderData<{
+    page: types.Page
+    header: types.Page
+    footer: types.Page
+  }>()
   // Clean the received content
   // Removes unknown or not allowed bricks
   const { pageTypes, bricks } = useReactBricksContext()
