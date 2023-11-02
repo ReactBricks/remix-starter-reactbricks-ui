@@ -108,7 +108,7 @@ export default function List() {
                 content={post.meta.description || ''}
                 author={post.author}
                 date={post.publishedAt || ''}
-                featuredImg={post.meta.featuredImage || ''}
+                featuredImg={post.meta.image}
               />
             ))}
           </div>

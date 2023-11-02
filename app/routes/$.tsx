@@ -1,4 +1,9 @@
-import { PageViewer, fetchPage, cleanPage } from 'react-bricks/frontend'
+import {
+  PageViewer,
+  fetchPage,
+  cleanPage,
+  getSchemaOrgData,
+} from 'react-bricks/frontend'
 import { useReactBricksContext } from 'react-bricks/frontend'
 import { useLoaderData } from '@remix-run/react'
 import type { MetaFunction } from '@remix-run/node'
@@ -6,6 +11,7 @@ import Layout from '~/components/Layout'
 import ErrorMessage from '~/components/ErrorMessage'
 import { redirect } from '@remix-run/node'
 import type { LoaderArgs } from '@remix-run/node'
+import { Helmet } from 'react-helmet'
 
 export const loader = async ({ params }: LoaderArgs) => {
   const splat = params['*']
@@ -35,11 +41,11 @@ export const loader = async ({ params }: LoaderArgs) => {
   }
 }
 
-export const meta: MetaFunction = ({ data }) => {
-  return {
-    title: data?.page?.meta?.title || 'Blog post',
-  }
-}
+// export const meta: MetaFunction = ({ data }) => {
+//   return {
+//     title: data?.page?.meta?.title || 'Blog post',
+//   }
+// }
 
 export default function Page() {
   const { page, header, footer } = useLoaderData()
@@ -53,8 +59,67 @@ export default function Page() {
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = footer ? cleanPage(footer, pageTypes, bricks) : null
 
+  const { meta } = page
+  const schemaOrgData = getSchemaOrgData(page)
+
   return (
     <Layout>
+      <Helmet>
+        {meta.title && <title>{meta.title}</title>}
+        {/* Meta tag */}
+        {meta.title && <meta name="title" content={meta.title} />}
+        {meta.description && (
+          <meta name="description" content={meta.description} />
+        )}
+        {meta.keywords && <meta name="keywords" content={meta.keywords} />}
+        {/* OpenGraph */}
+        {meta.openGraph?.url && (
+          <meta property="og:url" content={meta.openGraph?.url} />
+        )}
+        {meta.openGraph?.type && (
+          <meta property="og:type" content={meta.openGraph?.type} />
+        )}
+        {meta.openGraph?.title && (
+          <meta property="og:title" content={meta.openGraph?.title} />
+        )}
+        {meta.openGraph?.description && (
+          <meta
+            property="og:description"
+            content={meta.openGraph?.description}
+          />
+        )}
+        {meta.openGraph?.image && (
+          <meta property="og:image" content={meta.openGraph?.image.src} />
+        )}
+        {/* Twitter Card */}
+        {meta.twitterCard?.card && (
+          <meta name="twitter:card" content={meta.twitterCard?.card} />
+        )}
+        {meta.twitterCard?.site && (
+          <meta name="twitter:site" content={meta.twitterCard?.site} />
+        )}
+        {meta.twitterCard?.creator && (
+          <meta name="twitter:creator" content={meta.twitterCard?.creator} />
+        )}
+        {meta.twitterCard?.title && (
+          <meta name="twitter:title" content={meta.twitterCard?.title} />
+        )}
+        {meta.twitterCard?.description && (
+          <meta
+            name="twitter:description"
+            content={meta.twitterCard?.description}
+          />
+        )}
+        {meta.twitterCard?.image && (
+          <meta name="twitter:image" content={meta.twitterCard.image.src} />
+        )}
+        {schemaOrgData && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: schemaOrgData }}
+          ></script>
+        )}
+      </Helmet>
       <PageViewer page={headerOk} showClickToEdit={false} />
       <PageViewer page={pageOk} />
       <PageViewer page={footerOk} showClickToEdit={false} />
