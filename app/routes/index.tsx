@@ -103,11 +103,9 @@ export default function Page() {
         {meta.twitterCard?.image && (
           <meta name="twitter:image" content={meta.twitterCard.image.src} />
         )}
+
         {schemaOrgData && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: schemaOrgData }}
-          ></script>
+          <script type="application/ld+json">{schemaOrgData}</script>
         )}
       </Helmet>
       <PageViewer page={headerOk} showClickToEdit={false} />
