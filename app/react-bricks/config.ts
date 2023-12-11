@@ -7,6 +7,7 @@ import RemixLink from "./RemixLink"
 const config: types.ReactBricksConfig = {
   appId: "", //process.env.APP_ID as string || '',
   apiKey: "", //process.env.API_KEY as string || '',
+  environment: "", //process.env.PUBLIC_ENVIRONMENT || '',
   pageTypes,
   bricks,
   logo: "/logo.svg",
