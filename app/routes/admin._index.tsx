@@ -4,9 +4,11 @@ import type { MetaFunction } from '@remix-run/node'
 import { Admin, Login } from 'react-bricks'
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'React Bricks Login',
-  }
+  return [
+    {
+      title: 'React Bricks Login',
+    },
+  ]
 }
 
 const AdminLogin: React.FC = () => {

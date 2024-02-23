@@ -1,20 +1,19 @@
+import { Link, useLoaderData, useRouteError } from '@remix-run/react'
 import {
+  PageViewer,
+  cleanPage,
   fetchPage,
   fetchPages,
   fetchTags,
-  types,
-  cleanPage,
-  PageViewer,
+  useReactBricksContext,
 } from 'react-bricks/frontend'
-import { useReactBricksContext } from 'react-bricks/frontend'
-import { useLoaderData, Link } from '@remix-run/react'
-import PostListItem from '~/components/PostListItem'
+
+import Layout from '~/components/Layout'
 import TagListItem from '~/components/TagListItem'
-import type { LoaderArgs } from '@remix-run/node'
+import PostListItem from '~/components/PostListItem'
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params }: { params: any }) => {
   const { tag } = params
-
   const pagesByTag = await fetchPages(process.env.API_KEY as string, {
     tag: tag?.toString(),
     type: 'blog',
@@ -55,27 +54,19 @@ export const loader = async ({ params }: LoaderArgs) => {
   }
 }
 
-interface LoaderProps {
-  pagesByTag: types.Page[]
-  popularPosts: types.Page[]
-  error: string
-  filterTag: string
-  allTags: string[]
-  header: types.Page
-  footer: types.Page
-}
-
-export default function List() {
+export default function Page() {
   const { filterTag, pagesByTag, allTags, header, footer } =
-    useLoaderData<LoaderProps>()
+    useLoaderData<typeof loader>()
 
+  // Clean the received content
+  // Removes unknown or not allowed bricks
   const { pageTypes, bricks } = useReactBricksContext()
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
-  const footerOk = header ? cleanPage(footer, pageTypes, bricks) : null
+  const footerOk = footer ? cleanPage(footer, pageTypes, bricks) : null
 
   return (
-    <>
-      <PageViewer page={headerOk} showClickToEdit={false} />
+    <Layout>
+      <PageViewer page={headerOk} />
       <div className="bg-white dark:bg-gray-900">
         <div className="max-w-6xl mx-auto px-8 py-16">
           <div className="flex items-center justify-between  text-gray-900 dark:text-white pb-4 mt-10 sm:mt-12 mb-4">
@@ -114,7 +105,7 @@ export default function List() {
           </div>
         </div>
       </div>
-      <PageViewer page={footerOk} showClickToEdit={false} />
-    </>
+      <PageViewer page={footerOk} />
+    </Layout>
   )
 }

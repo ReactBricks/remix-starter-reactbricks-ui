@@ -5,7 +5,7 @@ module.exports = {
     './app/routes/**/*.tsx',
     './app/components/**/*.tsx',
     './app/react-bricks/**/*.{ts,tsx}',
-    './app/root.tsx'
+    './app/root.tsx',
   ],
   darkMode: 'class',
   theme: {

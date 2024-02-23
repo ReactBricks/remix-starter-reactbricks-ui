@@ -1,9 +1,4 @@
-import {
-  MetaFunction,
-  redirect,
-  useLoaderData,
-  useRouteError,
-} from '@remix-run/react'
+import { MetaFunction, useLoaderData, useRouteError } from '@remix-run/react'
 import {
   PageViewer,
   cleanPage,
@@ -13,7 +8,6 @@ import {
 } from 'react-bricks/frontend'
 
 import config from '~/react-bricks/config'
-import ErrorMessage from '~/components/ErrorMessage'
 import Layout from '~/components/Layout'
 
 export const loader = async ({ params }: { params: any }) => {
@@ -39,8 +33,6 @@ export const loader = async ({ params }: { params: any }) => {
       )
     }),
   ])
-
-  if (page.slug === 'header' || page.slug === 'footer') return redirect('/')
 
   return {
     page,
@@ -113,10 +105,7 @@ export default function Page() {
   // Clean the received content
   // Removes unknown or not allowed bricks
   const { pageTypes, bricks } = useReactBricksContext()
-  const pageOk =
-    page && page.slug !== 'header' && page.slug !== 'footer'
-      ? cleanPage(page, pageTypes, bricks)
-      : null
+  const pageOk = page ? cleanPage(page, pageTypes, bricks) : null
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = footer ? cleanPage(footer, pageTypes, bricks) : null
 
@@ -125,16 +114,6 @@ export default function Page() {
       <PageViewer page={headerOk} />
       <PageViewer page={pageOk} main />
       <PageViewer page={footerOk} />
-    </Layout>
-  )
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError()
-
-  return (
-    <Layout>
-      <ErrorMessage error={error as Error} />
     </Layout>
   )
 }
