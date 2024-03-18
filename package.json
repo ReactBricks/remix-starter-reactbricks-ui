@@ -29,7 +29,7 @@
     "pigeon-maps": "^0.21.3",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
-    "react-bricks": "4.3.0-beta.1",
+    "react-bricks": "^4.3.0",
     "react-dom": "^18.2.0",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
