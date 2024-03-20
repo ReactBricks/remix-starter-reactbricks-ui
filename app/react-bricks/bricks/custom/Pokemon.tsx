@@ -45,7 +45,6 @@ const Pokemon: types.Brick<PokemonProps> = ({
 Pokemon.schema = {
   name: 'pokemon',
   label: 'Pokemon',
-  previewImageUrl: `/bricks-preview-images/pokemon.png`,
   getDefaultProps: () => ({}),
   getExternalData: (page, brickProps) =>
     fetch(`https://pokeapi.co/api/v2/pokemon/${brickProps.pokemonName}`)
