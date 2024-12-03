@@ -1,7 +1,6 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/node'
+import type { MetaFunction } from '@remix-run/node'
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -15,11 +14,7 @@ import { ReactBricks } from 'react-bricks/frontend'
 
 import ErrorMessage from './components/ErrorMessage'
 import config from './react-bricks/config'
-import stylesheet from './tailwind.css'
-
-export const links: LinksFunction = () => [
-  ...(stylesheet ? [{ rel: 'stylesheet', href: stylesheet }] : []),
-]
+import './tailwind.css'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Remix Blog Starter with React Bricks' }]
@@ -91,7 +86,6 @@ export default function App() {
         </ReactBricks>
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   )
